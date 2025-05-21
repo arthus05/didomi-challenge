@@ -1,4 +1,4 @@
-import { PageLayout } from '../layout/Page/Page'
+import { PageLayout } from '../../layout/Page/Page'
 
 export const Consents = () => {
   return (

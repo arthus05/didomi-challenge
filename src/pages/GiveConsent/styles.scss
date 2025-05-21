@@ -1,0 +1,48 @@
+.give-consent {
+  display: flex;
+  justify-content: center;
+  height: 100vh;
+  width: 100%;
+
+  &__form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    &-user-data {
+      border: none;
+      display: flex;
+      gap: 0.5rem;
+
+      input {
+        width: 140px;
+        padding: 0.25rem;
+        border: 1.5px solid #404040;
+
+        font-size: 1.2rem;
+      }
+    }
+
+    &-consents {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+
+      border-width: 1px;
+      border-color: #b2b2b2;
+
+      color: #7d7d7d;
+    }
+
+    &-submit {
+      padding: 1rem;
+      border-radius: 0.5rem;
+
+      color: #fff;
+      font-weight: bold;
+
+      background-color: #5b8af7;
+      border: 1px solid #656a78;
+    }
+  }
+}

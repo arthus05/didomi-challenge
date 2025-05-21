@@ -10,7 +10,7 @@ export const PageLayout = ({ children }: PageLayoutProps) => {
   return (
     <div className='page-layout'>
       <Sidebar />
-      {children}
+      <main>{children}</main>
     </div>
   )
 }
