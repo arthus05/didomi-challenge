@@ -8,6 +8,11 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    gap: 1rem;
+
+    p {
+      margin: 0;
+    }
 
     &-user-data {
       border: none;
@@ -39,6 +44,7 @@
       border-radius: 0.5rem;
 
       color: #fff;
+      font-size: 1rem;
       font-weight: bold;
 
       background-color: #5b8af7;
