@@ -1,0 +1,42 @@
+.consents {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  padding: 1rem;
+
+  &__table {
+    width: 720px;
+
+    border: 2px solid #202020;
+    border-spacing: 0;
+
+    td,
+    th {
+      padding: 1rem;
+
+      border: 1px solid #6F6F6F
+    }
+  }
+
+  &__paging-buttons {
+    max-width: 100%;
+    padding: 0.5rem;
+
+    display: flex;
+    justify-content: space-between;
+
+    border: 1px solid #6F6F6F;
+
+    span {
+      color: #7967f7;
+      text-decoration: underline;
+    }
+
+    &--numbers {
+      display: flex;
+      gap: 0.25rem;
+    }
+  }
+}

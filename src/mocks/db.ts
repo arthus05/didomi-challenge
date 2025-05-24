@@ -18,6 +18,12 @@ let consents: IConsent[] = [
     email: "princess@manager.com",
     consents: ["Receive newsletter"],
   },
+  {
+    id: "3",
+    name: "John Doe",
+    email: "johndoe@manager.com",
+    consents: ["Receive newsletter"],
+  },
 ];
 
 let lastId = 3;

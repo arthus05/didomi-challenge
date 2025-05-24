@@ -47,41 +47,45 @@ export const Consents = () => {
   return (
     <PageLayout>
       <section className="consents">
-        <table>
-          <thead>
-            <tr>
-              <th>Name</th>
-              <th>Email</th>
-              <th>Consent given for</th>
-            </tr>
-          </thead>
-          <tbody>
-            {paginatedConsents.map((consent) => (
+        <div className="consents__content">
+          <table className="consents__table">
+            <thead>
               <tr>
-                <td>{consent.name}</td>
-                <td>{consent.email}</td>
-                <td>{consent.consents.join(", ")}</td>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Consent given for</th>
               </tr>
-            ))}
-          </tbody>
-        </table>
-        {totalPages > 1 ? (
-          <section>
-            <span onClick={() => onPageChange(currentPage - 1)}>
-              {"<"} {"<"} Previous page
-            </span>
-            <div>
-              {Array.from({ length: totalPages }, (_, i) => i + 1).map((p) => (
-                <span onClick={() => onPageChange(p)}>{p}</span>
+            </thead>
+            <tbody>
+              {paginatedConsents.map((consent) => (
+                <tr>
+                  <td>{consent.name}</td>
+                  <td>{consent.email}</td>
+                  <td>{consent.consents.join(", ")}</td>
+                </tr>
               ))}
-            </div>
-            <span onClick={() => onPageChange(currentPage + 1)}>
-              Next page {">"} {">"}
-            </span>
-          </section>
-        ) : (
-          <></>
-        )}
+            </tbody>
+          </table>
+          {totalPages > 1 ? (
+            <section className="consents__paging-buttons">
+              <span onClick={() => onPageChange(currentPage - 1)}>
+                {"<"} {"<"} Previous page
+              </span>
+              <div className="consents__paging-buttons--numbers">
+                {Array.from({ length: totalPages }, (_, i) => i + 1).map(
+                  (p) => (
+                    <span onClick={() => onPageChange(p)}>{p}</span>
+                  ),
+                )}
+              </div>
+              <span onClick={() => onPageChange(currentPage + 1)}>
+                Next page {">"} {">"}
+              </span>
+            </section>
+          ) : (
+            <></>
+          )}
+        </div>
       </section>
     </PageLayout>
   );
