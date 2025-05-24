@@ -5,28 +5,9 @@ const API_BASE_URL = "/consents";
 
 export const handlers = [
   // mock for GET /consents
-  http.get(API_BASE_URL, ({ request }) => {
-    const url = new URL(request.url);
-    const page = parseInt(url.searchParams.get("page") || "1", 10);
-    const limit = parseInt(url.searchParams.get("limit") || "2", 10);
-
-    const allConsents = db.consents.getAll();
-    const totalItems = allConsents.length;
-    const totalPages = Math.ceil(totalItems / limit);
-
-    const paginatedConsents = allConsents.slice(
-      (page - 1) * limit,
-      page * limit,
-    );
-
+  http.get(API_BASE_URL, () => {
     return HttpResponse.json({
-      data: paginatedConsents,
-      pagination: {
-        currentPage: page,
-        itemsPerPage: limit,
-        totalItems,
-        totalPages,
-      },
+      data: db.consents.getAll(),
     });
   }),
 
