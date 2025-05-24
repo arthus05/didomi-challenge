@@ -10,8 +10,6 @@ export const GiveConsent = () => {
     Record<string, boolean>
   >({});
 
-  const apiURI = "";
-
   const handleConsentSelect = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { value, checked } = e.target;
 
@@ -21,16 +19,28 @@ export const GiveConsent = () => {
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    await fetch(apiURI, {
-      method: "POST",
-      body: JSON.stringify({
-        name,
-        email,
-        consents: Object.keys(selectedConsents).filter(
-          (key) => selectedConsents[key],
-        ),
-      }),
-    });
+    try {
+      await fetch("/consents", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          name,
+          email,
+          consents: Object.keys(selectedConsents).filter(
+            (key) => selectedConsents[key],
+          ),
+        }),
+      });
+
+      setName("");
+      setEmail("");
+      setSelectedConsents({});
+      alert("Consent submitted successfully!");
+    } catch (err) {
+      console.error("Failed to submit new consent:", err);
+    }
   };
 
   return (
@@ -93,7 +103,13 @@ export const GiveConsent = () => {
             </div>
           </fieldset>
 
-          <button type="submit" className="give-consent__form-submit">
+          <button
+            type="submit"
+            className="give-consent__form-submit"
+            disabled={
+              Object.values(selectedConsents).filter(Boolean).length === 0
+            }
+          >
             Give consent
           </button>
         </form>
