@@ -1,47 +1,103 @@
-import { PageLayout } from '../../layout/Page/Page'
+import { useState } from "react";
+import { PageLayout } from "../../layout/Page/Page";
 
-import './styles.scss'
+import "./styles.scss";
 
 export const GiveConsent = () => {
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault()
-    const formData = new FormData(e.target as HTMLFormElement)
-    const parsedData = Object.fromEntries(formData.entries())
-  }
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [selectedConsents, setSelectedConsents] = useState<
+    Record<string, boolean>
+  >({});
+
+  const apiURI = "";
+
+  const handleConsentSelect = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { value, checked } = e.target;
+
+    setSelectedConsents((prev) => ({ ...prev, [value]: checked }));
+  };
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+
+    await fetch(apiURI, {
+      method: "POST",
+      body: JSON.stringify({
+        name,
+        email,
+        consents: Object.keys(selectedConsents).filter(
+          (key) => selectedConsents[key],
+        ),
+      }),
+    });
+  };
 
   return (
     <PageLayout>
-      <section className='give-consent'>
-        <form className='give-consent__form' onSubmit={handleSubmit}>
-          <fieldset className='give-consent__form-user-data'>
-            <input type='text' id='name' name='name' placeholder='Name' />
-            <input type='email' id='email' name='email' placeholder='Email address' />
+      <section className="give-consent">
+        <form className="give-consent__form" onSubmit={handleSubmit}>
+          <fieldset className="give-consent__form-user-data">
+            <input
+              type="text"
+              id="name"
+              name="name"
+              placeholder="Name"
+              onChange={(e) => setName(e.target.value)}
+            />
+            <input
+              type="email"
+              id="email"
+              name="email"
+              placeholder="Email address"
+              onChange={(e) => setEmail(e.target.value)}
+            />
           </fieldset>
 
           <p>I agree to:</p>
 
-          <fieldset className='give-consent__form-consents'>
+          <fieldset className="give-consent__form-consents">
             <div>
-              <input type='checkbox' id='consent1' name='consent1' value='Receive newsletter' />
-              <label htmlFor='consent1'>Receive newsletter</label>
+              <input
+                type="checkbox"
+                id="consent1"
+                name="consent1"
+                value="Receive newsletter"
+                onChange={handleConsentSelect}
+              />
+              <label htmlFor="consent1">Receive newsletter</label>
             </div>
 
             <div>
-              <input type='checkbox' id='consent2' name='consent2' value='Be shown targeted ads' />
-              <label htmlFor='consent2'>Be shown targeted ads</label>
+              <input
+                type="checkbox"
+                id="consent2"
+                name="consent2"
+                value="Be shown targeted ads"
+                onChange={handleConsentSelect}
+              />
+              <label htmlFor="consent2">Be shown targeted ads</label>
             </div>
 
             <div>
-              <input type='checkbox' id='consent3' name='consent3' value='Contribute to anonymous visit statistics' />
-              <label htmlFor='consent3'>Contribute to anonymous visit statistics</label>
+              <input
+                type="checkbox"
+                id="consent3"
+                name="consent3"
+                value="Contribute to anonymous visit statistics"
+                onChange={handleConsentSelect}
+              />
+              <label htmlFor="consent3">
+                Contribute to anonymous visit statistics
+              </label>
             </div>
           </fieldset>
 
-          <button type='submit' className='give-consent__form-submit'>
+          <button type="submit" className="give-consent__form-submit">
             Give consent
           </button>
         </form>
       </section>
     </PageLayout>
-  )
-}
+  );
+};
