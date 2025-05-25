@@ -2,6 +2,15 @@ import { useEffect, useState } from "react";
 import { PageLayout } from "../../layout/Page/Page";
 
 import "./styles.scss";
+import {
+  Paper,
+  Table,
+  TableBody,
+  TableHead,
+  TableCell,
+  TableRow,
+} from "@mui/material";
+import { DataGrid, type GridColDef } from "@mui/x-data-grid";
 
 interface IConsents {
   name: string;
@@ -48,24 +57,24 @@ export const Consents = () => {
     <PageLayout>
       <section className="consents">
         <div className="consents__content">
-          <table className="consents__table">
-            <thead>
-              <tr>
-                <th>Name</th>
-                <th>Email</th>
-                <th>Consent given for</th>
-              </tr>
-            </thead>
-            <tbody>
+          <Table className="consents__table">
+            <TableHead>
+              <TableRow>
+                <TableCell>Name</TableCell>
+                <TableCell>Email</TableCell>
+                <TableCell>Consent given for</TableCell>
+              </TableRow>
+            </TableHead>
+            <TableBody>
               {paginatedConsents.map((consent) => (
-                <tr>
-                  <td>{consent.name}</td>
-                  <td>{consent.email}</td>
-                  <td>{consent.consents.join(", ")}</td>
-                </tr>
+                <TableRow>
+                  <TableCell>{consent.name}</TableCell>
+                  <TableCell>{consent.email}</TableCell>
+                  <TableCell>{consent.consents.join(", ")}</TableCell>
+                </TableRow>
               ))}
-            </tbody>
-          </table>
+            </TableBody>
+          </Table>
           {totalPages > 1 ? (
             <section className="consents__paging-buttons">
               <span onClick={() => onPageChange(currentPage - 1)}>

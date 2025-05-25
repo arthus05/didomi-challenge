@@ -17,31 +17,8 @@
     gap: 0.5rem;
 
     &-item {
-      width: 100%;
-
       display: flex;
       justify-content: center;
-
-      a {
-        width: 100%;
-        height: 100%;
-        padding: 0.25rem 1rem;
-        border: 1px solid #000;
-
-        color: #000;
-        font-size: 1.25rem;
-        text-decoration: none;
-        text-align: center;
-      }
-    }
-
-    &-item--active {
-      background-color: #dfe8fa;
-      font-weight: bold;
-
-      a {
-        border-color: #99a7c9;
-      }
     }
   }
 }
